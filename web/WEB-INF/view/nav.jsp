@@ -4,6 +4,7 @@
         menu.put("forms/form.jsp", "Formulario");
         menu.put("choice.jsp", "Choice");
         menu.put("DispatchServlet", "DispatchServlet");
+        menu.put("modulo.jsp", "Modulos");
     %>
     <ul id="inLine">
         <% for (String chave : menu.keySet()) {%>
