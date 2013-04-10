@@ -6,9 +6,11 @@ package jedi.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,11 +54,11 @@ public class LoginServlet extends HttpServlet {
              */
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
-            out.println("Usuário ou senha incorretos.");
+            out.println("<div>Usuário ou senha incorretos.</div>");
             /*
              * retorna para a página de login do usuário
              */
-            rd = request.getRequestDispatcher("/login.html");
+            rd = request.getRequestDispatcher("/login.jsp");
             rd.include(request, response);
             out.close();
         } else {
@@ -64,6 +66,32 @@ public class LoginServlet extends HttpServlet {
              * armazena o objeto User na sessão
              */
             HttpSession session = request.getSession();
+            /*
+             * gerar um novo session ID para o usuário
+             */
+            String sessionID =  request.getSession().toString(); //generateSessionID();
+            /*
+             * criar novo mapa que será utilizado para armazenar os dados a serem mantidos na sessão
+             */
+            HashMap map = new HashMap();
+            /*
+             * recuperar um mapa utilizado como contêiner para as informações do usuário
+             */
+//            HashMap containerMap = retrieveSessionMaps();
+            /*
+             * adicionar o novo mapa criado no mapa contendo todas as informações de sessão
+             */
+//            containerMap.put(sessionID, map);
+            /*
+             * criar o cookie que será armazenado no browser
+             */
+            Cookie sessionCookie = new Cookie("JSESSIONID", sessionID + "Fabricio Nogueira");
+            /*
+             * adicionar o cookie à resposta e pedir ao browser para armazená-lo
+             */
+            response.addCookie(sessionCookie);
+
+            
             //            session.setAttribute(user);
             /*
              * constrói a resposta a partir de múltiplos componentes HTML

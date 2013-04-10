@@ -68,7 +68,7 @@ public class DispatchServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("Error occurred during login request processing");
-        RequestDispatcher rd = request.getRequestDispatcher("/login.html");
+        RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
         rd.include(request, response);
 
     }
